@@ -1,0 +1,27 @@
+
+
+server:
+  port: 83
+  address: 127.0.0.1
+  context-path: /
+
+
+
+spring:
+  freemarker:
+    request-context-attribute: request
+    suffix: .html
+    #支持其他jar中的模板文件
+    prefer-file-system-access: false
+
+  #国际化配置
+  messages:
+  #指定message的basename，多个以逗号分隔，如果不加包名的话，默认从classpath路径开始，默认: messages
+    basename: i18n/messages
+
+  http:
+    encoding:
+      force: true
+
+
+

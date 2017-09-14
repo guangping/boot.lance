@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>errorMessage</title>
+</head>
+<body>
+<#if ex.message??>
+   <h2>${ex.message}，或系统可能正在维护升级中，请等会儿再试！</h2>
+<#else>
+   <h2>系统可能正在维护升级中，请等会儿再试！</h2>
+</#if>
+</body>
+</html>
