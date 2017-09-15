@@ -8,9 +8,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication(scanBasePackages = {"io.lance.boot.web.*", "io.lance.boot.common.*", "io.lance.boot.common.core.*"})
 public class AppApplication {
 
-
-
-
     public static void main(String[] args) {
         SpringApplication.run(AppApplication.class, args);
     }

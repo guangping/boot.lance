@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.concurrent.Callable;
 
 /**
@@ -40,6 +41,8 @@ public class TestController {
     public JsonResult index() {
         JsonResult jsonResult = new JsonResult();
         jsonResult.setMessage("中文");
+        jsonResult.setData(new Date());
+
         return jsonResult;
     }
 
