@@ -8,6 +8,7 @@ import io.lance.boot.common.core.util.Constants;
 import io.lance.boot.common.web.freemarker.template.JsonDirectiveModel;
 import io.lance.boot.common.web.freemarker.template.SubStringCn;
 import io.lance.boot.common.web.interceptor.GuestPageInterceptor;
+import io.lance.boot.common.web.interceptor.PermissionInterceptor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,6 +121,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         logger.info("拦截器配置 start ......");
         registry.addInterceptor(new LocaleChangeInterceptor()).addPathPatterns("/**");
         registry.addInterceptor(new GuestPageInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(new PermissionInterceptor()).addPathPatterns("/**");
 
         super.addInterceptors(registry);
     }

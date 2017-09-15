@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<configuration status="info">
+<!--
+开启异步日志 jvm参数
+-DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
+packages 扫描包下的扩展
+-->
+<configuration status="info" packages="io.lance.boot.common.core.log4j2">
+    <Properties>
+        <!--${web:rootDir} 工程目录 ${sys:catalina.home} tomcat目录-->
+        <property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %c:%L - %m%n</property>
+        <property name="LOG_DIR">${sys:catalina.home}/logs</property>
+        <property name="ROLLING_FILE_ERROR_MSG">${LOG_DIR}/error-%d{yyyyMMdd}-%i.log.gz</property>
+        <property name="ERROR_MSG">${LOG_DIR}/error.log</property>
+        <property name="FILE_SIZE">20 MB</property>
+        <property name="CHARSET">UTF-8</property>
+    </Properties>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
             <!-- 输出日志的格式 -->
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %c:%L - %m%n"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
         </Console>
     </Appenders>
 

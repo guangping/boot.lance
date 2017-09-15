@@ -1,5 +1,8 @@
 package io.lance.boot.common.web.util;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import io.lance.boot.common.core.util.Constants;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -8,6 +11,8 @@ import org.springframework.web.servlet.support.RequestContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Author: Lance.
@@ -65,5 +70,26 @@ public class WebUtil {
 
     public static String getIpAddress() {
         return getIpAddress(getRequest());
+    }
+
+    /**
+     * @desc: 返回json
+     * @author: lance
+     * @time: 2017-09-15 11:32:06
+     */
+    public void writeJson(String json, HttpServletResponse response) throws IOException {
+        response.setContentType(Constants.MEDIA_TYPE_JSON);
+        PrintWriter writer = response.getWriter();
+        writer.write(json);
+        writer.flush();
+        writer.close();
+    }
+
+    public void writeJson(Object obj, HttpServletResponse response) throws IOException {
+        response.setContentType(Constants.MEDIA_TYPE_JSON);
+        PrintWriter writer = response.getWriter();
+        writer.write(JSONObject.toJSONString(obj, SerializerFeature.WriteMapNullValue, SerializerFeature.WriteNullStringAsEmpty, SerializerFeature.WriteNullBooleanAsFalse));
+        writer.flush();
+        writer.close();
     }
 }

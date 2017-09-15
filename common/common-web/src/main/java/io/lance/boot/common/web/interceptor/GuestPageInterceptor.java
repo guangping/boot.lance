@@ -25,10 +25,10 @@ public class GuestPageInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        logger.info("免登录拦截器....");
         endStartLocal.set(System.currentTimeMillis());
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         GuestPage annotation = handlerMethod.getMethodAnnotation(GuestPage.class);
-        logger.info("test interceptor .....");
 
         return super.preHandle(request, response, handler);
     }
