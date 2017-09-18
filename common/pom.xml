@@ -39,6 +39,11 @@
                 <artifactId>common-web</artifactId>
                 <version>${common.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.lance.boot.common</groupId>
+                <artifactId>common-dao</artifactId>
+                <version>${common.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
