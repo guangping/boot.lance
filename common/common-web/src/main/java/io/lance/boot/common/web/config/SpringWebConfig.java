@@ -1,10 +1,12 @@
 package io.lance.boot.common.web.config;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.google.common.collect.Lists;
 import io.lance.boot.common.core.util.Constants;
+import io.lance.boot.common.dao.config.DruidDBConfig;
 import io.lance.boot.common.web.freemarker.template.JsonDirectiveModel;
 import io.lance.boot.common.web.freemarker.template.SubStringCn;
 import io.lance.boot.common.web.interceptor.GuestPageInterceptor;
@@ -29,7 +31,9 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 import java.nio.charset.Charset;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Executor;
@@ -150,8 +154,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
      * @author: lance
      * @time: 2017-09-14 16:13:13
      */
-    @PostConstruct
-    public void freemarkerConfig() {
+    private void freemarkerConfig() {
         logger.info("freemarker配置 start ......");
         configuration.addAutoImport("i18n", "ftl/spring.ftl");
         configuration.addAutoImport("c", "ftl/common.ftl");
@@ -187,5 +190,55 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         executor.initialize();
         return executor;
     }
+
+
+    /**
+     * @desc: 初始化时执行
+     * @author: lance
+     * @time: 2017-09-18 13:53:25
+     */
+    @PostConstruct
+    public void init() {
+        this.freemarkerConfig();
+
+
+    }
+
+    @Autowired
+    private DruidDBConfig druidDBConfig;
+
+    @Primary
+    @Bean("dataSource")
+    public DataSource dataSource() {
+        logger.info("初始化 dataSource .....");
+
+        DruidDataSource datasource = new DruidDataSource();
+
+        datasource.setUrl(this.druidDBConfig.getDbUrl());
+        datasource.setUsername(this.druidDBConfig.getUsername());
+        datasource.setPassword(this.druidDBConfig.getPassword());
+        datasource.setDriverClassName(this.druidDBConfig.getDriverClassName());
+
+        //configuration
+        datasource.setInitialSize(this.druidDBConfig.getInitialSize());
+        datasource.setMinIdle(this.druidDBConfig.getMinIdle());
+        datasource.setMaxActive(this.druidDBConfig.getMaxActive());
+        datasource.setMaxWait(this.druidDBConfig.getMaxWait());
+        datasource.setTimeBetweenEvictionRunsMillis(this.druidDBConfig.getTimeBetweenEvictionRunsMillis());
+        datasource.setMinEvictableIdleTimeMillis(this.druidDBConfig.getMinEvictableIdleTimeMillis());
+        datasource.setValidationQuery(this.druidDBConfig.getValidationQuery());
+        datasource.setTestWhileIdle(this.druidDBConfig.isTestWhileIdle());
+        datasource.setTestOnBorrow(this.druidDBConfig.isTestOnBorrow());
+        datasource.setTestOnReturn(this.druidDBConfig.isTestOnReturn());
+        datasource.setPoolPreparedStatements(this.druidDBConfig.isPoolPreparedStatements());
+        datasource.setMaxPoolPreparedStatementPerConnectionSize(this.druidDBConfig.getMaxPoolPreparedStatementPerConnectionSize());
+        try {
+            datasource.setFilters(this.druidDBConfig.getFilters());
+        } catch (SQLException e) {
+            logger.error("druid configuration initialization filter", e);
+        }
+        return datasource;
+    }
+
 
 }

@@ -56,7 +56,7 @@
                 <!--非可执行jar-->
                 <configuration>
                     <classifier>exec</classifier>
-                    <mainClass>io.lance.boot.common.core.AppApplication</mainClass>
+                    <mainClass>${main.class}</mainClass>
                 </configuration>
                 <executions>
                     <execution>
