@@ -10,6 +10,7 @@ import io.lance.boot.common.dao.config.DruidDBConfig;
 import io.lance.boot.common.web.freemarker.template.JsonDirectiveModel;
 import io.lance.boot.common.web.freemarker.template.SubStringCn;
 import io.lance.boot.common.web.freemarker.template.UrlSignatureDirective;
+import io.lance.boot.common.web.freemarker.template.UserInfoDirective;
 import io.lance.boot.common.web.interceptor.GuestPageInterceptor;
 import io.lance.boot.common.web.interceptor.PermissionInterceptor;
 import org.apache.logging.log4j.LogManager;
@@ -170,6 +171,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         configuration.setSharedVariable("SubStringCn", new SubStringCn());
         configuration.setSharedVariable("Json", new JsonDirectiveModel());
         configuration.setSharedVariable("UrlSignature",new UrlSignatureDirective());
+        configuration.setSharedVariable("UserInfo",new UserInfoDirective());
     }
 
     /**
