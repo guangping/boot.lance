@@ -3,12 +3,14 @@ package io.lance.boot.common.core.spring;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.stereotype.Service;
 
 /**
  * @desc: 获取bean
  * @author: lance
  * @time: 2017-09-13 13:56:14
  */
+@Service
 public class SpringApplicationContext implements ApplicationContextAware {
 
     private static ConfigurableApplicationContext applicationContext;
