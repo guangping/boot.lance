@@ -1,0 +1,16 @@
+server:
+  port: 82
+  context-path: /
+
+#eureka \u914D\u7F6E
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${server.address}:${server.port}/eureka/
+
+
+spring:
+  freemarker:
+    prefer-file-system-access: false

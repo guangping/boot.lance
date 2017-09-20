@@ -9,12 +9,14 @@
         <version>0.0.2</version>
     </parent>
 
-    <artifactId>web-ui</artifactId>
-    <version>0.0.2</version>
+    <groupId>io.lance.boot.web</groupId>
+    <artifactId>web-center</artifactId>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
 
-    <name>web-ui</name>
-    <description>Spring Boot web-ui module</description>
+    <name>web-center</name>
+    <description>Spring cloud Registration Center</description>
+
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,15 +25,10 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>io.lance.boot.common</groupId>
-            <artifactId>common-web</artifactId>
-        </dependency>
-
-        <!--服务提供者-->
+        <!--注册中心-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <artifactId>spring-cloud-starter-eureka-server</artifactId>
         </dependency>
     </dependencies>
 
@@ -44,11 +41,10 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>**/static/*</include>
-                    <include>**/templates/**</include>
+                    <include>**/spring/*</include>
+                    <include>*.*</include>
                 </includes>
             </resource>
         </resources>
     </build>
-
 </project>

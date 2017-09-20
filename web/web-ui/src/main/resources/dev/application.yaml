@@ -2,9 +2,10 @@
 
 server:
   port: 83
-  address: 127.0.0.1
   context-path: /
-
+  session:
+    cookie:
+      http-only: true
 
 
 spring:
@@ -47,6 +48,16 @@ spring:
     poolPreparedStatements: true
     maxPoolPreparedStatementPerConnectionSize: 20
 
+  #应用名称
+  application:
+    name: common-first
+
+
+  mvc:
+    date-format: yyyy-MM-dd HH:mm
+
+
+
 
 mybatis:
   config-location: classpath:mybatis-conf.xml
@@ -54,3 +65,9 @@ mybatis:
   type-aliases-package:
   check-config-location: true
 
+
+#eureka 配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:82/eureka/
