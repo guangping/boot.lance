@@ -19,6 +19,7 @@
     <modules>
         <module>web-app</module>
         <module>web-ui</module>
+        <module>web-center</module>
     </modules>
 
     <properties>

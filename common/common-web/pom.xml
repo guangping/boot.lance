@@ -25,6 +25,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>io.lance.boot.common</groupId>
             <artifactId>common-dao</artifactId>
         </dependency>
