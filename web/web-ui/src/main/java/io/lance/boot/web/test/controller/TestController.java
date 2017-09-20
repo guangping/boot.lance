@@ -1,14 +1,17 @@
 package io.lance.boot.web.test.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import io.lance.boot.common.core.exception.EbsException;
 import io.lance.boot.common.core.util.Constants;
 import io.lance.boot.common.core.util.JsonResult;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 import java.util.concurrent.Callable;
@@ -23,6 +26,9 @@ import java.util.concurrent.Callable;
 public class TestController {
 
     private static final Logger logger = LogManager.getLogger();
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @RequestMapping(value = "/error3")
     public Callable<String> error3() {
@@ -67,6 +73,18 @@ public class TestController {
         if (true) {
             throw new EbsException("测试错误");
         }
+        return "test/index";
+    }
+
+    /**
+     * @desc: 调用远程服务
+     * @author: lance
+     * @time: 2017-09-20 16:46:28
+     */
+    @RequestMapping(value = "/remote")
+    public String remote() {
+        JsonResult jsonResult = this.restTemplate.getForObject("http://COMMON-PROVIDER/getUser", JsonResult.class);
+        logger.info(JSONObject.toJSONString(jsonResult));
         return "test/index";
     }
 

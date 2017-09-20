@@ -1,7 +1,7 @@
 
 
 server:
-  port: 83
+  port: 84
   context-path: /
   session:
     cookie:
@@ -50,7 +50,7 @@ spring:
 
   #应用名称
   application:
-    name: common-first
+    name: common-consumer
 
 
   mvc:

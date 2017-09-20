@@ -1,5 +1,71 @@
-
-
 server:
-  port: 82
+  port: 83
   context-path: /
+  session:
+    cookie:
+      http-only: true
+
+
+spring:
+  freemarker:
+    request-context-attribute: request
+    suffix: .html
+    #支持其他jar中的模板文件
+    prefer-file-system-access: false
+
+  #国际化配置
+  messages:
+  #指定message的basename，多个以逗号分隔，如果不加包名的话，默认从classpath路径开始，默认: messages
+    basename: i18n/messages
+
+  http:
+    encoding:
+      force: true
+
+#数据库配置
+  datasource:
+    name:
+    url:
+    username: ebs
+    password: ebs
+    driver-class-name: com.mysql.jdbc.Driver
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    #druid相关配置
+    filters: stat
+    maxActive: 20
+    initialSize: 5
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+
+  #应用名称
+  application:
+    name: common-provider
+
+
+  mvc:
+    date-format: yyyy-MM-dd HH:mm
+
+
+
+
+mybatis:
+  config-location: classpath:mybatis-conf.xml
+  mapperLocations: classpath*:mapper/**/*.xml
+  type-aliases-package:
+  check-config-location: true
+
+
+#eureka 配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:82/eureka/
