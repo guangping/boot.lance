@@ -46,7 +46,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <!--非可执行jar-->
                 <configuration>
                     <classifier>exec</classifier>
                     <mainClass>${main.class}</mainClass>
