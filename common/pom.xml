@@ -65,6 +65,7 @@
         <module>common-core</module>
         <module>common-dao</module>
         <module>common-web</module>
+        <module>common-cache</module>
     </modules>
 
 </project>
