@@ -53,7 +53,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
             <exclusions>
-                <exclusion>
+               <!-- <exclusion>
                     <groupId>org.apache.logging.log4j</groupId>
                     <artifactId>log4j-api</artifactId>
                 </exclusion>
@@ -64,7 +64,7 @@
                 <exclusion>
                     <groupId>org.apache.logging.log4j</groupId>
                     <artifactId>log4j-slf4j-impl</artifactId>
-                </exclusion>
+                </exclusion>-->
             </exclusions>
         </dependency>
         <dependency>
