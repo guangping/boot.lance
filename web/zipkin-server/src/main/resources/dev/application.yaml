@@ -1,0 +1,11 @@
+server:
+  port: 85
+
+
+
+spring:
+  application:
+    name: ZipKinServer
+
+  freemarker:
+    prefer-file-system-access: false

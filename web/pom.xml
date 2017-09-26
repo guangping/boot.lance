@@ -20,6 +20,7 @@
         <module>web-app</module>
         <module>web-ui</module>
         <module>web-center</module>
+        <module>zipkin-server</module>
     </modules>
 
     <properties>
