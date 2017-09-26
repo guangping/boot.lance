@@ -74,6 +74,8 @@ create table sys_doc_file (
 )engine=innodb default charset=utf8 COMMENT '文件记录表';
 
 
+/**操作日志*/
+
 
 
 

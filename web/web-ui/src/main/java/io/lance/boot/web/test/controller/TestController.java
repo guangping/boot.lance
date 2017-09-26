@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import io.lance.boot.common.core.exception.EbsException;
 import io.lance.boot.common.core.util.Constants;
 import io.lance.boot.common.core.util.JsonResult;
+import io.lance.boot.common.web.service.I18nService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class TestController {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private I18nService i18nService;
 
     @RequestMapping(value = "/error3")
     public Callable<String> error3() {
@@ -64,6 +68,8 @@ public class TestController {
 
     @RequestMapping(value = "/error2")
     public String error2(ModelMap model) {
+        String language = this.i18nService.getMessage("common_language");
+        logger.info("language:{}", language);
         model.addAttribute("test", "test");
         return "test/index";
     }
