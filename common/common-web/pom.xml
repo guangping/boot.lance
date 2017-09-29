@@ -21,6 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <servlet.version>3.0.1</servlet.version>
     </properties>
 
     <dependencies>
@@ -32,6 +33,13 @@
         <dependency>
             <groupId>io.lance.boot.common</groupId>
             <artifactId>common-dao</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

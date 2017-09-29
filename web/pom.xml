@@ -16,12 +16,7 @@
 
     <name>web</name>
     <description>Spring Boot web module</description>
-    <modules>
-        <module>web-app</module>
-        <module>web-ui</module>
-        <module>web-center</module>
-        <module>zipkin-server</module>
-    </modules>
+
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -39,6 +34,13 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+    </dependencies>
 
     <profiles>
         <profile>
@@ -65,8 +67,23 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+   <!--             <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>com.google.guava</groupId>
+                            <artifactId>guava</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>-->
             </plugin>
         </plugins>
     </build>
+
+    <modules>
+        <module>web-app</module>
+        <module>web-ui</module>
+        <module>web-center</module>
+        <module>zipkin-server</module>
+    </modules>
 
 </project>

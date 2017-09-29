@@ -55,6 +55,9 @@ spring:
 
   mvc:
     date-format: yyyy-MM-dd HH:mm
+  resources:
+    #配置静态文件路径
+    static-locations: classpath:webdocs/
 
 
 
@@ -71,3 +74,5 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:82/eureka/
+
+
