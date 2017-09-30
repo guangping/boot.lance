@@ -26,6 +26,12 @@
         <dependency>
             <groupId>io.lance.boot.common</groupId>
             <artifactId>common-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>tomcat-jdbc</artifactId>
+                    <groupId>org.apache.tomcat</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!--服务提供者-->
