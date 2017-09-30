@@ -67,14 +67,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-   <!--             <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>com.google.guava</groupId>
-                            <artifactId>guava</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>-->
             </plugin>
         </plugins>
     </build>
