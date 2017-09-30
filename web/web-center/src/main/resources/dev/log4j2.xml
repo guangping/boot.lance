@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<configuration status="info">
+<configuration status="info" packages="io.lance.boot.common.core.log4j2">
+    <Properties>
+        <property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %c:%L - %m%n</property>
+        <property name="LOG_DIR">./logs</property>
+        <property name="ROLLING_FILE_ERROR_MSG">${LOG_DIR}/error-%d{yyyyMMdd}-%i.log.gz</property>
+        <property name="ERROR_MSG">${LOG_DIR}/error.log</property>
+        <property name="FILE_SIZE">20 MB</property>
+        <property name="CHARSET">UTF-8</property>
+    </Properties>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
             <!-- 输出日志的格式 -->
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %c:%L - %m%n"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
         </Console>
+
+        <RollingRandomAccessFile name="error" fileName="${ERROR_MSG}" filePattern="${ROLLING_FILE_ERROR_MSG}">
+            <PatternLayout charset="${CHARSET}" pattern="${LOG_PATTERN}"/>
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="${FILE_SIZE}"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingRandomAccessFile>
     </Appenders>
 
     <Loggers>
         <logger name="org.springframework.web" level="debug" additivity="false">
             <AppenderRef ref="Console"/>
+            <AppenderRef ref="error"/>
         </logger>
-        <logger name="io.lance.boot.web" level="info" additivity="false">
-            <AppenderRef ref="Console"/>
-        </logger>
+
         <root level="info">
             <AppenderRef ref="Console"/>
+            <AppenderRef ref="error"/>
         </root>
     </Loggers>
 
