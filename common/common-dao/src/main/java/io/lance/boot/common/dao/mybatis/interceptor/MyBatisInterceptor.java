@@ -18,6 +18,7 @@ import java.util.Properties;
  * @desc: mybatis拦截器 可拦截sql,动态拼装实现权限控制
  * @author: lance
  * @time: 2017-10-12 16:50
+ * http://www.jb51.net/article/111971.htm
  */
 @Intercepts({@Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class, Integer.class})})
 public class MyBatisInterceptor implements Interceptor {
