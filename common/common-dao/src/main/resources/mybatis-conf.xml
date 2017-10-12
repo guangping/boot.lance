@@ -7,4 +7,11 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <setting name="autoMappingUnknownColumnBehavior" value="WARNING"/>
     </settings>
+    
+    <plugins>
+        <plugin interceptor="io.lance.boot.common.dao.mybatis.interceptor.MyBatisInterceptor">
+            <property name="test" value="test"/>
+            <property name="pageSqlId" value=""/>
+        </plugin>
+    </plugins>
 </configuration>

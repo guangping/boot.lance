@@ -15,7 +15,7 @@
     <packaging>jar</packaging>
 
     <name>web-center</name>
-    <description>Spring cloud Registration Center</description>
+    <description>eureka 注册中心</description>
 
 
     <properties>

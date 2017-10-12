@@ -33,7 +33,7 @@ public class JsonUtils {
     }
 
     /**
-     * @desc: 复杂对象转换
+     * @desc: 复杂对象转换 List<T>
      * @author: lance
      * @time: 2017-09-15 10:27:53
      */
