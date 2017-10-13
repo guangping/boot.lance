@@ -1,6 +1,9 @@
 server:
   port: 82
   context-path: /
+  undertow:
+    worker-threads:
+    io-threads:
 
 #eureka \u914D\u7F6E
 eureka:
@@ -14,3 +17,6 @@ eureka:
 spring:
   freemarker:
     prefer-file-system-access: false
+
+
+
