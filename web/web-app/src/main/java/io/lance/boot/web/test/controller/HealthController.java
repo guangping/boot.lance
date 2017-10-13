@@ -16,9 +16,22 @@ public class HealthController {
 
     private static final Logger logger = LogManager.getLogger();
 
+    /**
+     * 状态页面
+     */
     @RequestMapping(value = "/info", method = {RequestMethod.GET, RequestMethod.POST})
     public String info() {
-        logger.info("check heart....");
+        logger.info("check status....");
+        return "success";
+    }
+
+
+    /**
+     * 健康监控
+     */
+    @RequestMapping(value = "/health", method = {RequestMethod.GET, RequestMethod.POST})
+    public String health() {
+        logger.info("check health....");
         return "success";
     }
 }
