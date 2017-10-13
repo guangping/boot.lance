@@ -20,10 +20,7 @@ public class BizController {
     private static final Logger logger = LogManager.getLogger();
 
 
-    @RequestMapping(value = "/info", method = {RequestMethod.GET, RequestMethod.POST})
-    public String info() {
-        return "success";
-    }
+
 
     @RequestMapping(value = "/getUser", method = RequestMethod.GET)
     public JsonResult<String> getUser() {
