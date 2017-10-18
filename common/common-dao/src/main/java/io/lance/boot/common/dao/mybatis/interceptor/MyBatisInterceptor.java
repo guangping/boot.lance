@@ -41,6 +41,9 @@ public class MyBatisInterceptor implements Interceptor {
                 BoundSql boundSql = delegate.getBoundSql();
                 Object parameterObject = boundSql.getParameterObject();
 
+                //设置改变sql  TODO 动态改变sql
+                String newSql="";
+                ReflectHelper.setValueByFieldName(boundSql,"sql",newSql);
             }
 
         }
