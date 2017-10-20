@@ -1,5 +1,6 @@
 package io.lance.boot.common.core.listener;
 
+import io.lance.boot.common.core.annotation.A;
 import io.lance.boot.common.core.annotation.Apv;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,9 +19,8 @@ import java.util.Map;
  * @author: lance
  * @time: 2017-10-20 15:33
  */
-@Apv
 @Component
-public class MyApplicationListener implements ApplicationListener<ContextRefreshedEvent> {
+public class MyApplicationListener implements ApplicationListener<ContextRefreshedEvent>,A {
 
     private final static Logger logger = LogManager.getLogger();
 
