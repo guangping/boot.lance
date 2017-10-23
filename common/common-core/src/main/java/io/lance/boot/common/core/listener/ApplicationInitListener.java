@@ -17,12 +17,14 @@ import java.util.Map;
  * @time: 2017-10-20 15:33
  */
 @Component
-public class MyApplicationListener implements ApplicationListener<ContextRefreshedEvent>,A {
+public class ApplicationInitListener implements ApplicationListener<ContextRefreshedEvent>, A {
 
     private final static Logger logger = LogManager.getLogger();
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+        logger.info("容器初始化后执行...");
+
         ApplicationContext context = event.getApplicationContext();
 
        /* List<String> list = Arrays.asList(context.getBeanDefinitionNames());
@@ -30,7 +32,7 @@ public class MyApplicationListener implements ApplicationListener<ContextRefresh
         list.forEach(beanName -> {
 
         });*/
-        Map<String,Object> beanMap=context.getBeansWithAnnotation(Apv.class);
+        Map<String, Object> beanMap = context.getBeansWithAnnotation(Apv.class);
         System.out.println(beanMap);
 
     }
