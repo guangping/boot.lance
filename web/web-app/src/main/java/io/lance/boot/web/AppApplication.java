@@ -7,7 +7,9 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @EnableDiscoveryClient
 @EnableAsync
-@SpringBootApplication(scanBasePackages = {"io.lance.boot.common.*","io.lance.boot.web.*"})
+@SpringBootApplication(scanBasePackages = {"io.lance.boot.common.*","io.lance.boot.web.*"},excludeName = {
+		"websocketContainerCustomizer","jacksonObjectMapper","jacksonObjectMapperBuilder"
+})
 public class AppApplication {
 
 	public static void main(String[] args) {
