@@ -1,12 +1,10 @@
 package io.lance.boot.common.web.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.google.common.collect.Lists;
 import io.lance.boot.common.core.util.Constants;
-import io.lance.boot.common.dao.config.DruidDBConfig;
 import io.lance.boot.common.web.freemarker.template.JsonDirectiveModel;
 import io.lance.boot.common.web.freemarker.template.SubStringCn;
 import io.lance.boot.common.web.freemarker.template.UrlSignatureDirective;
@@ -23,7 +21,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -33,13 +30,9 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
 import java.nio.charset.Charset;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * Author Lance.
@@ -170,29 +163,8 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
         configuration.setSharedVariable("SubStringCn", new SubStringCn());
         configuration.setSharedVariable("Json", new JsonDirectiveModel());
-        configuration.setSharedVariable("UrlSignature",new UrlSignatureDirective());
-        configuration.setSharedVariable("UserInfo",new UserInfoDirective());
-    }
-
-    /**
-     * @desc: 自定义线程池
-     * @author: lance
-     * @time: 2017-09-15 10:35:59
-     */
-    @Bean
-    public Executor taskExecutor() {
-        logger.info("线程池配置 start ......");
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(10);
-        executor.setMaxPoolSize(50);
-        executor.setQueueCapacity(1024);
-        executor.setThreadNamePrefix("Executor-");
-
-        // rejection-policy：当pool已经达到max size的时候，如何处理新任务
-        // CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行
-        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-        executor.initialize();
-        return executor;
+        configuration.setSharedVariable("UrlSignature", new UrlSignatureDirective());
+        configuration.setSharedVariable("UserInfo", new UserInfoDirective());
     }
 
 
@@ -204,44 +176,6 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
     @PostConstruct
     public void init() {
         this.freemarkerConfig();
-
-
-    }
-
-    @Autowired
-    private DruidDBConfig druidDBConfig;
-
-    @Primary
-    @Bean("dataSource")
-    public DataSource dataSource() {
-        logger.info("初始化 dataSource .....");
-
-        DruidDataSource datasource = new DruidDataSource();
-
-        datasource.setUrl(this.druidDBConfig.getDbUrl());
-        datasource.setUsername(this.druidDBConfig.getUsername());
-        datasource.setPassword(this.druidDBConfig.getPassword());
-        datasource.setDriverClassName(this.druidDBConfig.getDriverClassName());
-
-        //configuration
-        datasource.setInitialSize(this.druidDBConfig.getInitialSize());
-        datasource.setMinIdle(this.druidDBConfig.getMinIdle());
-        datasource.setMaxActive(this.druidDBConfig.getMaxActive());
-        datasource.setMaxWait(this.druidDBConfig.getMaxWait());
-        datasource.setTimeBetweenEvictionRunsMillis(this.druidDBConfig.getTimeBetweenEvictionRunsMillis());
-        datasource.setMinEvictableIdleTimeMillis(this.druidDBConfig.getMinEvictableIdleTimeMillis());
-        datasource.setValidationQuery(this.druidDBConfig.getValidationQuery());
-        datasource.setTestWhileIdle(this.druidDBConfig.isTestWhileIdle());
-        datasource.setTestOnBorrow(this.druidDBConfig.isTestOnBorrow());
-        datasource.setTestOnReturn(this.druidDBConfig.isTestOnReturn());
-        datasource.setPoolPreparedStatements(this.druidDBConfig.isPoolPreparedStatements());
-        datasource.setMaxPoolPreparedStatementPerConnectionSize(this.druidDBConfig.getMaxPoolPreparedStatementPerConnectionSize());
-        try {
-            datasource.setFilters(this.druidDBConfig.getFilters());
-        } catch (SQLException e) {
-            logger.error("druid configuration initialization filter", e);
-        }
-        return datasource;
     }
 
 

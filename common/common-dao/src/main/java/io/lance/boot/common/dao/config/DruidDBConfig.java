@@ -2,7 +2,7 @@ package io.lance.boot.common.dao.config;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,63 +11,54 @@ import org.springframework.stereotype.Component;
  * @time: 2017-09-15 16:34
  */
 @Component
+@ConfigurationProperties(prefix = "spring.datasource")
 public class DruidDBConfig {
 
     private static final Logger logger = LogManager.getLogger();
 
-    @Value("${spring.datasource.url}")
-    private String dbUrl;
+    private String url;
 
-    @Value("${spring.datasource.username}")
     private String username;
 
-    @Value("${spring.datasource.password}")
     private String password;
 
-    @Value("${spring.datasource.driver-class-name}")
     private String driverClassName;
 
-    @Value("${spring.datasource.initialSize}")
     private int initialSize;
 
-    @Value("${spring.datasource.minIdle}")
     private int minIdle;
 
-    @Value("${spring.datasource.maxActive}")
     private int maxActive;
 
-    @Value("${spring.datasource.maxWait}")
     private int maxWait;
 
-    @Value("${spring.datasource.timeBetweenEvictionRunsMillis}")
     private int timeBetweenEvictionRunsMillis;
 
-    @Value("${spring.datasource.minEvictableIdleTimeMillis}")
     private int minEvictableIdleTimeMillis;
 
-    @Value("${spring.datasource.validationQuery}")
     private String validationQuery;
 
-    @Value("${spring.datasource.testWhileIdle}")
     private boolean testWhileIdle;
 
-    @Value("${spring.datasource.testOnBorrow}")
     private boolean testOnBorrow;
 
-    @Value("${spring.datasource.testOnReturn}")
     private boolean testOnReturn;
 
-    @Value("${spring.datasource.poolPreparedStatements}")
+
     private boolean poolPreparedStatements;
 
-    @Value("${spring.datasource.maxPoolPreparedStatementPerConnectionSize}")
+
     private int maxPoolPreparedStatementPerConnectionSize;
 
-    @Value("${spring.datasource.filters}")
     private String filters;
-    
-    public void setDbUrl(String dbUrl) {
-        this.dbUrl = dbUrl;
+
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public void setUsername(String username) {
@@ -134,9 +125,6 @@ public class DruidDBConfig {
         this.filters = filters;
     }
 
-    public String getDbUrl() {
-        return dbUrl;
-    }
 
     public String getUsername() {
         return username;
@@ -205,7 +193,7 @@ public class DruidDBConfig {
     @Override
     public String toString() {
         return "DruidDBConfig{" +
-                "dbUrl='" + dbUrl + '\'' +
+                "url='" + url + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", driverClassName='" + driverClassName + '\'' +

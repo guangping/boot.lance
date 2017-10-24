@@ -54,6 +54,11 @@ spring:
   mvc:
     date-format: yyyy-MM-dd HH:mm
 
+  redis:
+    host: 127.0.0.1
+    password:
+    database: 1
+    port: 6379
 
 
 
@@ -69,4 +74,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:82/eureka/
+
+
 

@@ -23,6 +23,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <common.version>0.0.3</common.version>
+        <cache.version>0.0.1</cache.version>
     </properties>
 
     <dependencyManagement>
@@ -31,6 +32,13 @@
                 <groupId>io.lance.boot.common</groupId>
                 <artifactId>common-web</artifactId>
                 <version>${common.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>io.lance.boot.common</groupId>
+                <artifactId>common-cache</artifactId>
+                <version>${cache.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

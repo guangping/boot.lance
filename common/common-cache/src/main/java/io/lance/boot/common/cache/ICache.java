@@ -1,5 +1,7 @@
 package io.lance.boot.common.cache;
 
+import com.alibaba.fastjson.TypeReference;
+
 /**
  * @desc: 缓存规范接口
  * @author: lance
@@ -11,7 +13,7 @@ public interface ICache {
 
     void set(String key, String value, int expire);
 
-    void get(String key);
+    String get(String key);
 
     void del(String key);
 
@@ -30,6 +32,8 @@ public interface ICache {
      * @time: 2017-09-21 17:16:24
      */
     <T> T getObj(String key, Class<T> clazz);
+
+    <T> T getObj(String key, TypeReference<T> type);
 
     /**
      * @desc: 设置对象

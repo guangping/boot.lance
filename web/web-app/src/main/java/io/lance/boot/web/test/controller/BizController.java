@@ -1,10 +1,12 @@
 package io.lance.boot.web.test.controller;
 
 
+import io.lance.boot.common.cache.ICache;
 import io.lance.boot.common.core.util.Constants;
 import io.lance.boot.common.core.util.JsonResult;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,11 +21,14 @@ public class BizController {
 
     private static final Logger logger = LogManager.getLogger();
 
-
+    @Autowired
+    private ICache redisCache;
 
 
     @RequestMapping(value = "/getUser", method = RequestMethod.GET)
     public JsonResult<String> getUser() {
+        this.redisCache.set("housts", "1");
+
         logger.info("getUser=========");
         JsonResult<String> jsonResult = new JsonResult<String>();
         jsonResult.setSuccess(Constants.YES);
